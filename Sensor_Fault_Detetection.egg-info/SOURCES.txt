@@ -12,6 +12,10 @@ sensor/logger.py
 sensor/cloud_storage/__init__.py
 sensor/components/__init__.py
 sensor/configuration/__init__.py
+sensor/configuration/mongo_db_connection.py
+sensor/constant/__init__.py
+sensor/constant/database.py
+sensor/constant/env_variable.py
 sensor/data_access/__init__.py
 sensor/entity/__init__.py
 sensor/entity/artifact_entity.py
