@@ -29,7 +29,7 @@ class DataIngestion:
         Export mongo db collection record as data frame into feature
         """
         try:
-            logging.info("Exportin sensor data from mongodb to feature store")
+            logging.info("Exporting sensor data from mongodb to feature store")
             sensor_data = SensorData()
             dataframe = sensor_data.export_collection_as_dataframe(collection_name=self.data_ingestion_config.collection_name)
             feature_store_file_path = self.data_ingestion_config.feature_store_file_path            
