@@ -1,13 +1,20 @@
-from sensor.exception import SensorException
+#Exception
+import os,sys
+from sensor.exception import SensorException 
+#Logging
 from sensor.logger import logging
+#Enitity
 from sensor.entity.config_entity import DataIngestionConfig
 from sensor.entity.artifact_entity import DataIngestionArtifact
 from sklearn.model_selection import train_test_split
-import os,sys
+# Data
 from pandas import DataFrame
 from sensor.data_access.sensor_data import SensorData
+# Constant
 from sensor.utils.main_utils import read_yaml_file
 from sensor.constant.training_pipeline import SCHEMA_FILE_PATH
+
+
 class DataIngestion:
 
     def __init__(self,data_ingestion_config:DataIngestionConfig):
@@ -22,7 +29,7 @@ class DataIngestion:
         Export mongo db collection record as data frame into feature
         """
         try:
-            logging.info("Exporting data from mongodb to feature store")
+            logging.info("Exportin sensor data from mongodb to feature store")
             sensor_data = SensorData()
             dataframe = sensor_data.export_collection_as_dataframe(collection_name=self.data_ingestion_config.collection_name)
             feature_store_file_path = self.data_ingestion_config.feature_store_file_path            
