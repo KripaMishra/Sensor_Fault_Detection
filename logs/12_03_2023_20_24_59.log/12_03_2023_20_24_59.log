@@ -1,0 +1,2 @@
+[2023-12-03 20:25:00,602] root - INFO - data ingestion started
+[2023-12-03 20:25:00,665] root - INFO - Exporting sensor data from mongodb to feature store
