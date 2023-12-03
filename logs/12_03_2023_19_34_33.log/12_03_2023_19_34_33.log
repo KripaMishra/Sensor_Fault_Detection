@@ -1,0 +1,3 @@
+[2023-12-03 19:34:34,523] root - INFO - data ingestion started
+[2023-12-03 19:34:34,587] root - INFO - Exporting sensor data from mongodb to feature store
+[2023-12-03 19:34:34,588] root - ERROR - Error initializing SensorData: argument of type 'NoneType' is not iterable

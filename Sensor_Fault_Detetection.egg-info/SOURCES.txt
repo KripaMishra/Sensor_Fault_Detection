@@ -12,6 +12,7 @@ sensor/logger.py
 sensor/cloud_storage/__init__.py
 sensor/components/__init__.py
 sensor/components/data_ingestion.py
+sensor/components/data_validation.py
 sensor/configuration/__init__.py
 sensor/configuration/mongo_db_connection.py
 sensor/constant/__init__.py
@@ -25,3 +26,6 @@ sensor/entity/artifact_entity.py
 sensor/entity/config_entity.py
 sensor/ml/__init__.py
 sensor/pipeline/__init__.py
+sensor/pipeline/training_pipeline.py
+sensor/utils/__init__.py
+sensor/utils/main_utils.py
