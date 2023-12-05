@@ -1,3 +1,0 @@
-[2023-12-03 20:13:42,420] root - INFO - data ingestion started
-[2023-12-03 20:13:42,478] root - INFO - Exporting sensor data from mongodb to feature store
-[2023-12-03 20:13:42,478] root - ERROR - Error initializing SensorData: local variable 'MONGODB_URL_KEY' referenced before assignment

@@ -1,3 +1,0 @@
-[2023-12-03 20:10:06,120] root - INFO - data ingestion started
-[2023-12-03 20:10:06,178] root - INFO - Exporting sensor data from mongodb to feature store
-[2023-12-03 20:10:06,179] root - ERROR - Error initializing SensorData: name 'MONGODB_URL_KEY' is not defined

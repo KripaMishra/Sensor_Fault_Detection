@@ -1,4 +1,0 @@
-[2023-12-04 00:11:51,000] root - INFO - Entered the start_data_ingestion method of TrainPipeline class
-[2023-12-04 00:11:51,000] root - INFO - Getting the data from mongodb
-[2023-12-04 00:11:51,044] root - INFO - Exporting data from mongodb to feature store
-[2023-12-04 00:11:51,191] root - INFO - Saving exported data into feature store file path: artifact/12_04_2023_00_11_50/data_ingestion/feature_store/sensor.csv
