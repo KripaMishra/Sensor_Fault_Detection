@@ -87,7 +87,9 @@ def load_object(file_path):
     
     try:
         with open(file_path, 'rb') as file_obj:
-            return dill.load(file_obj)
+            content = file_obj.read().decode('utf-8')
+
+        return dill.load(content)
         
         
     except Exception as e:
