@@ -100,11 +100,16 @@ class TrainPipeline:
             raise  SensorException(e,sys)
 
 
-    def start_model_evaluation(self):
+    def start_model_evaluation(self,data_validation_artifact:DataValidationArtifact,
+                                 model_trainer_artifact:ModelTrainerArtifact,
+                                ):
         try:
-            pass
-        except Exception as e:
-            raise SensorException (e,sys)
+            model_eval_config = ModelEvaluationConfig(self.training_pipeline_config)
+            model_eval = ModelEvaluation(model_eval_config, data_validation_artifact, model_trainer_artifact)
+            model_eval_artifact = model_eval.initiate_model_evaluation()
+            return model_eval_artifact
+        except  Exception as e:
+            raise  SensorException(e,sys)
 
     def start_model_pusher(self): 
         try:
@@ -114,10 +119,10 @@ class TrainPipeline:
 
 
     def sync_artifact_dir_to_s3(self):
-                try:
-                   pass
-                except Exception as e:
-                    raise SensorException(e,sys)
+        try:
+            pass
+        except Exception as e:
+            raise SensorException(e,sys)
 
     def sync_saved_model_dir_to_s3(self):
         try:
@@ -131,6 +136,7 @@ class TrainPipeline:
                 data_validation_artifact = self.start_data_validation(data_ingestion_artifact)
                 data_transformation_artifact = self.start_data_transformation(data_validation_artifact)
                 model_trainer_artifact = self.start_model_trainer(data_transformation_artifact)
+                model_eval_artifact = self.start_model_evaluation(data_validation_artifact, model_trainer_artifact)
             except  Exception as e:
                 raise  SensorException(e,sys)
 

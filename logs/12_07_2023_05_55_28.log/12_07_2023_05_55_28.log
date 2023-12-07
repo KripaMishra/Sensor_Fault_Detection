@@ -1,0 +1,50 @@
+[2023-12-07 05:55:30,972] root - INFO - Entered the start_data_ingestion method of TrainPipeline class
+[2023-12-07 05:55:30,972] root - INFO - Getting the data from mongodb
+[2023-12-07 05:55:31,034] root - INFO - Exporting data from mongodb to feature store
+[2023-12-07 05:55:46,060] root - INFO - Saving exported data into feature store file path: artifact/12_07_2023_05_55_28/data_ingestion/feature_store/sensor.csv
+[2023-12-07 05:55:53,552] root - INFO - Entered split_data_as_train_test method of Data_Ingestion class
+[2023-12-07 05:55:53,553] root - INFO - starting train, test split
+[2023-12-07 05:55:53,654] root - INFO - Performed train test split on the dataframe
+[2023-12-07 05:55:53,655] root - INFO - Exited split_data_as_train_test method of Data_Ingestion class
+[2023-12-07 05:55:53,655] root - INFO - Exporting train and test file path.
+[2023-12-07 05:56:00,522] root - INFO - Exported train and test file path.
+[2023-12-07 05:56:00,785] root - INFO - Got the train_set and test_set from mongodb
+[2023-12-07 05:56:00,786] root - INFO - Exited the start_data_ingestion method of TrainPipeline class
+[2023-12-07 05:56:00,786] root - INFO - Entered the start_data_validation method of TrainPipeline class
+[2023-12-07 05:56:01,946] root - INFO - Required number of columns: 164
+[2023-12-07 05:56:01,947] root - INFO - Data frame has columns: 164
+[2023-12-07 05:56:01,947] root - INFO - Required number of columns: 164
+[2023-12-07 05:56:01,947] root - INFO - Data frame has columns: 164
+[2023-12-07 05:56:01,947] root - INFO - Missing numerical columns: [[]]
+[2023-12-07 05:56:01,948] root - INFO - Missing numerical columns: [[]]
+[2023-12-07 05:56:03,843] root - INFO - Data validation artifact: DataValidationArtifact(validation_status=False, valid_train_file_path='artifact/12_07_2023_05_55_28/data_ingestion/ingested/train.csv', valid_test_file_path='artifact/12_07_2023_05_55_28/data_ingestion/ingested/test.csv', invalid_train_file_path=None, invalid_test_file_path=None, drift_report_file_path='artifact/12_07_2023_05_55_28/data_validation/drift_report/report.yaml')
+[2023-12-07 05:56:03,845] root - INFO - Performed the data validation operation
+[2023-12-07 05:56:03,845] root - INFO - Exited the start_data_validation method of TrainPipeline class
+[2023-12-07 05:56:03,845] root - INFO - Entered the start_data_transformation method of TrainPipeline class
+[2023-12-07 05:56:03,845] root - INFO - Starting data transformation
+[2023-12-07 05:56:03,845] root - INFO - Entered get_data_transformer_object method of DataTransformation class
+[2023-12-07 05:56:03,845] root - INFO - Got numerical cols from schema config
+[2023-12-07 05:56:03,846] root - INFO - Initialized RobustScaler, Simple Imputer
+[2023-12-07 05:56:03,846] root - INFO - Created preprocessor object from ColumnTransformer
+[2023-12-07 05:56:03,846] root - INFO - Exited get_data_transformer_object method of DataTransformation class
+[2023-12-07 05:56:03,846] root - INFO - Got the preprocessor object
+[2023-12-07 05:56:04,998] root - INFO - Got train features and test features of Training dataset
+[2023-12-07 05:56:05,026] root - INFO - Got train features and test features of Testing dataset
+[2023-12-07 05:56:05,026] root - INFO - Applying preprocessing object on training dataframe and testing dataframe
+[2023-12-07 05:56:05,466] root - INFO - Used the preprocessor object to fit transform the train features
+[2023-12-07 05:56:05,536] root - INFO - Used the preprocessor object to transform the test features
+[2023-12-07 05:56:05,536] root - INFO - Applying SMOTETomek on Training dataset
+[2023-12-07 05:56:25,132] root - INFO - Applied SMOTETomek on training dataset
+[2023-12-07 05:56:25,133] root - INFO - Applying SMOTETomek on testing dataset
+[2023-12-07 05:56:29,581] root - INFO - Applied SMOTETomek on testing dataset
+[2023-12-07 05:56:29,581] root - INFO - Created train array and test array
+[2023-12-07 05:56:29,652] root - INFO - Entered the save_object method of MainUtils class
+[2023-12-07 05:56:29,658] root - INFO - Exited the save_object method of MainUtils class
+[2023-12-07 05:56:29,879] root - INFO - Saved the preprocessor object
+[2023-12-07 05:56:29,879] root - INFO - Exited initiate_data_transformation method of Data_Transformation class
+[2023-12-07 05:56:29,882] root - INFO - Performed the data transformation operation
+[2023-12-07 05:56:29,882] root - INFO - Exited the start_data_transformation method of TrainPipeline class
+[2023-12-07 05:56:29,882] root - INFO - Entering the start_model_trainer
+[2023-12-07 05:56:29,882] root - INFO - Entered the initiate_model_trainer method of class ModelTrainer
+[2023-12-07 05:56:29,883] root - INFO - loading the training array and testing array in initiate_model_trainer of class ModelTrainer
+[2023-12-07 05:56:29,883] root - INFO - Entered the load_object method of MainUtils class

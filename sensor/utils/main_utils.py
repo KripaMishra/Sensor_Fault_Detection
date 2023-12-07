@@ -1,5 +1,6 @@
 
 import yaml
+import pickle
 from sensor.exception import SensorException
 from sensor.logger import logging
 import os,sys
@@ -64,7 +65,6 @@ def save_object(file_path: str, obj: object) -> None:
         logging.info("Exited the save_object method of MainUtils class")
     except Exception as e:
         raise SensorException(e, sys) from e
-
 """
 def load_object(file_path: str) -> object:
     logging.info("Entered the load_object method of MainUtils class")
@@ -80,17 +80,17 @@ def load_object(file_path: str) -> object:
     except Exception as e:
         raise SensorException(e, sys) from e
 """
-
-
-def load_object(file_path):
+def load_object(file_path: str) -> object:
     logging.info("Entered the load_object method of MainUtils class")
-    
-    try:
-        with open(file_path, 'rb') as file_obj:
-            content = file_obj.read().decode('utf-8')
 
-        return dill.load(content)
-        
-        
+    try:
+        with open(file_path, "rb") as file_obj:
+            obj = pickle.load(file_obj)
+
+        logging.info("Exited the load_object method of MainUtils class")
+
+        return obj
+
     except Exception as e:
         raise SensorException(e, sys) from e
+

@@ -60,5 +60,11 @@ MODEL_TRAINER_OVER_FIITING_UNDER_FITTING_THRESHOLD: float = 0.05
 MODEL_TRAINER_MODEL_CONFIG_FILE_PATH: str = os.path.join("config", "model.yaml")
 
 """
-
+Model Evaluation Constants
 """
+MODEL_EVALUATION_DIR_NAME:str="model_evaluation"
+MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE:float= 0.2
+MODEL_EVALUATION_REPORT_NAME= "report.yaml"
+
+
+
