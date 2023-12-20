@@ -61,11 +61,11 @@ def save_object(file_path: str, obj: object) -> None:
         logging.info("Entered the save_object method of MainUtils class")
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         with open(file_path, "wb") as file_obj:
-            dill.dump(obj, file_obj)
+            dill.dump(obj, file_obj, protocol=dill.HIGHEST_PROTOCOL)
         logging.info("Exited the save_object method of MainUtils class")
     except Exception as e:
         raise SensorException(e, sys) from e
-"""
+
 def load_object(file_path: str) -> object:
     logging.info("Entered the load_object method of MainUtils class")
 
@@ -78,19 +78,5 @@ def load_object(file_path: str) -> object:
         return obj
 
     except Exception as e:
-        raise SensorException(e, sys) from e
-"""
-def load_object(file_path: str) -> object:
-    logging.info("Entered the load_object method of MainUtils class")
-
-    try:
-        with open(file_path, "rb") as file_obj:
-            obj = pickle.load(file_obj)
-
-        logging.info("Exited the load_object method of MainUtils class")
-
-        return obj
-
-    except Exception as e:
-        raise SensorException(e, sys) from e
+        raise SensorException(f"Error loading object from {file_path}: {e}") from e
 

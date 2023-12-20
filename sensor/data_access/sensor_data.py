@@ -24,8 +24,7 @@ class SensorData:
             raise SensorException(e, sys)
 
     def export_collection_as_dataframe(
-        self, collection_name: str, database_name: Optional[str] = None
-    ) -> pd.DataFrame:
+        self, collection_name: str, database_name: Optional[str] = None) -> pd.DataFrame:
         try:
             """
             export entire collectin as dataframe:
@@ -33,11 +32,12 @@ class SensorData:
             """
             if database_name is None:
                 collection = self.mongo_client.database[collection_name]
-
             else:
                 collection = self.mongo_client[database_name][collection_name]
-
             df = pd.DataFrame(list(collection.find()))
+
+            if "_id" in df.columns.to_list():
+                df = df.drop(columns=["_id"], axis=1)
 
             df.replace({"na": np.nan}, inplace=True)
 

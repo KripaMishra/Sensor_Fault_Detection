@@ -52,7 +52,7 @@ class ModelEvaluation:
                     improved_accuracy=None, 
                     best_model_path=None, 
                     trained_model_path=train_model_file_path, 
-                    train_model_metric_artifact=self.model_trainer_artifact.test_metric_artifact, 
+                    trained_model_metric_artifact=self.model_trainer_artifact.test_metric_artifact, 
                     best_model_metric_artifact=None)
                 logging.info(f"Model evaluation artifact: {model_evaluation_artifact}")
                 return model_evaluation_artifact
@@ -80,7 +80,7 @@ class ModelEvaluation:
                     improved_accuracy=improved_accuracy, 
                     best_model_path=latest_model_path, 
                     trained_model_path=train_model_file_path, 
-                    train_model_metric_artifact=trained_metric, 
+                    trained_model_metric_artifact=trained_metric, 
                     best_model_metric_artifact=latest_metric)
 
             model_eval_report = model_evaluation_artifact.__dict__
