@@ -17,8 +17,10 @@ from sensor.utils.main_utils import load_object
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import io
+import pandas as pd
 
 env_file_path=os.path.join(os.getcwd(),"env.yaml")
+uploaded_df = None
 
 def set_env_variable(env_file_path):
 
@@ -57,17 +59,23 @@ async def train_route():
 
 @app.post("/upload")
 async def upload_file(file: UploadFile):
+    global uploaded_df 
     try:
         contents = await file.read()
-        df = pd.read_csv(io.StringIO(contents.decode("utf-8")))
+        uploaded_df = pd.read_csv(io.StringIO(contents.decode("utf-8")))
 
-        return {"message": "File uploaded successfully", "data": df.to_dict(orient="records")}
+        return {"message": "File uploaded successfully", "data": uploaded_df.to_dict(orient="records")}
     except Exception as e:
         return {"message": f"Error processing file: {str(e)}"}
 
+
 @app.get("/predict")
 async def predict_route():
+    global uploaded_df
     try:
+        if uploaded_df is None:
+            return Response("No file uploaded. Upload a file first.")
+
         model_resolver = ModelResolver(model_dir=SAVED_MODEL_DIR)
         if not model_resolver.is_model_exists():
             return Response("Model is not available")
