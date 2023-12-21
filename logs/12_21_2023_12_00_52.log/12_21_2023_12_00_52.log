@@ -1,0 +1,159 @@
+[2023-12-21 12:00:53,883] uvicorn.error - INFO - Started server process [1364]
+[2023-12-21 12:00:53,883] uvicorn.error - INFO - Waiting for application startup.
+[2023-12-21 12:00:53,883] uvicorn.error - INFO - Application startup complete.
+[2023-12-21 12:00:53,884] uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+[2023-12-21 12:01:20,713] root - INFO - Entered the start_data_ingestion method of TrainPipeline class
+[2023-12-21 12:01:20,713] root - INFO - Getting the data from mongodb
+[2023-12-21 12:01:20,757] root - INFO - Exporting data from mongodb to feature store
+[2023-12-21 12:01:29,918] root - INFO - Saving exported data into feature store file path: artifact/12_21_2023_12_00_52/data_ingestion/feature_store/sensor.csv
+[2023-12-21 12:01:34,645] root - INFO - Entered split_data_as_train_test method of Data_Ingestion class
+[2023-12-21 12:01:34,645] root - INFO - starting train, test split
+[2023-12-21 12:01:34,695] root - INFO - Performed train test split on the dataframe
+[2023-12-21 12:01:34,695] root - INFO - Exited split_data_as_train_test method of Data_Ingestion class
+[2023-12-21 12:01:34,696] root - INFO - Exporting train and test file path.
+[2023-12-21 12:01:39,222] root - INFO - Exported train and test file path.
+[2023-12-21 12:01:39,384] root - INFO - Got the train_set and test_set from mongodb
+[2023-12-21 12:01:39,384] root - INFO - Exited the start_data_ingestion method of TrainPipeline class
+[2023-12-21 12:01:39,384] root - INFO - Entered the start_data_validation method of TrainPipeline class
+[2023-12-21 12:01:40,126] root - INFO - Required number of columns: 164
+[2023-12-21 12:01:40,127] root - INFO - Data frame has columns: 164
+[2023-12-21 12:01:40,127] root - INFO - Required number of columns: 164
+[2023-12-21 12:01:40,127] root - INFO - Data frame has columns: 164
+[2023-12-21 12:01:40,127] root - INFO - Missing numerical columns: [[]]
+[2023-12-21 12:01:40,128] root - INFO - Missing numerical columns: [[]]
+[2023-12-21 12:01:41,444] root - INFO - Data validation artifact: DataValidationArtifact(validation_status=False, valid_train_file_path='artifact/12_21_2023_12_00_52/data_ingestion/ingested/train.csv', valid_test_file_path='artifact/12_21_2023_12_00_52/data_ingestion/ingested/test.csv', invalid_train_file_path=None, invalid_test_file_path=None, drift_report_file_path='artifact/12_21_2023_12_00_52/data_validation/drift_report/report.yaml')
+[2023-12-21 12:01:41,445] root - INFO - Performed the data validation operation
+[2023-12-21 12:01:41,445] root - INFO - Exited the start_data_validation method of TrainPipeline class
+[2023-12-21 12:01:41,445] root - INFO - Entered the start_data_transformation method of TrainPipeline class
+[2023-12-21 12:01:41,445] root - INFO - Starting data transformation
+[2023-12-21 12:01:41,446] root - INFO - Entered get_data_transformer_object method of DataTransformation class
+[2023-12-21 12:01:41,446] root - INFO - Got numerical cols from schema config
+[2023-12-21 12:01:41,446] root - INFO - Initialized RobustScaler, Simple Imputer
+[2023-12-21 12:01:41,446] root - INFO - Created preprocessor object from ColumnTransformer
+[2023-12-21 12:01:41,446] root - INFO - Exited get_data_transformer_object method of DataTransformation class
+[2023-12-21 12:01:41,446] root - INFO - Got the preprocessor object
+[2023-12-21 12:01:42,184] root - INFO - Got train features and test features of Training dataset
+[2023-12-21 12:01:42,194] root - INFO - Got train features and test features of Testing dataset
+[2023-12-21 12:01:42,194] root - INFO - Applying preprocessing object on training dataframe and testing dataframe
+[2023-12-21 12:01:42,510] root - INFO - Used the preprocessor object to fit transform the train features
+[2023-12-21 12:01:42,537] root - INFO - Used the preprocessor object to transform the test features
+[2023-12-21 12:01:42,538] root - INFO - Applying SMOTETomek on Training dataset
+[2023-12-21 12:01:47,293] root - INFO - Applied SMOTETomek on training dataset
+[2023-12-21 12:01:47,293] root - INFO - Applying SMOTETomek on testing dataset
+[2023-12-21 12:01:47,800] root - INFO - Applied SMOTETomek on testing dataset
+[2023-12-21 12:01:47,801] root - INFO - Created train array and test array
+[2023-12-21 12:01:47,849] root - INFO - Entered the save_object method of MainUtils class
+[2023-12-21 12:01:47,853] root - INFO - Exited the save_object method of MainUtils class
+[2023-12-21 12:01:47,985] root - INFO - Saved the preprocessor object
+[2023-12-21 12:01:47,985] root - INFO - Exited initiate_data_transformation method of Data_Transformation class
+[2023-12-21 12:01:47,987] root - INFO - Performed the data transformation operation
+[2023-12-21 12:01:47,987] root - INFO - Exited the start_data_transformation method of TrainPipeline class
+[2023-12-21 12:01:47,987] root - INFO - Entering the start_model_trainer
+[2023-12-21 12:01:55,935] root - INFO - Entered the load_object method of MainUtils class
+[2023-12-21 12:01:55,936] root - INFO - Exited the load_object method of MainUtils class
+[2023-12-21 12:01:55,936] root - INFO - Entered the save_object method of MainUtils class
+[2023-12-21 12:01:55,944] root - INFO - Exited the save_object method of MainUtils class
+[2023-12-21 12:01:55,944] root - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='artifact/12_21_2023_12_00_52/model_trainer/trained_model/model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9999821482764162, precision_score=1.0, recall_score=0.9999642971901889), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9833441488211118, precision_score=0.9940233236151603, recall_score=0.9728919960051362))
+[2023-12-21 12:01:55,945] root - INFO - Performed the start_model_trainer operation
+[2023-12-21 12:01:55,945] root - INFO - Exited the start_model_trainer method of TrainPipeline class
+[2023-12-21 12:01:56,744] root - INFO - Entered the load_object method of MainUtils class
+[2023-12-21 12:01:56,751] root - INFO - Exited the load_object method of MainUtils class
+[2023-12-21 12:01:56,751] root - INFO - Entered the load_object method of MainUtils class
+[2023-12-21 12:01:56,756] root - INFO - Exited the load_object method of MainUtils class
+[2023-12-21 12:01:57,069] root - INFO - Model evaluation artifact: ModelEvaluationArtifact(is_model_accepted=False, improved_accuracy=-0.00111153766300931, best_model_path='saved_models/1703049895/model.pkl', trained_model_path='artifact/12_21_2023_12_00_52/model_trainer/trained_model/model.pkl', trained_model_metric_artifact=ClassificationMetricArtifact(f1_score=0.9583746283448958, precision_score=0.949901768172888, recall_score=0.967), best_model_metric_artifact=ClassificationMetricArtifact(f1_score=0.9594861660079052, precision_score=0.9482421875, recall_score=0.971))
+[2023-12-21 12:02:43,717] root - INFO - Entered the load_object method of MainUtils class
+[2023-12-21 12:02:43,723] root - INFO - Exited the load_object method of MainUtils class
+[2023-12-21 12:02:43,724] uvicorn.error - ERROR - Exception in ASGI application
+Traceback (most recent call last):
+  File "main.py", line 85, in predict_route
+    y_pred = model.predict(df)
+NameError: name 'df' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/config/.local/lib/python3.8/site-packages/uvicorn/protocols/http/httptools_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/config/.local/lib/python3.8/site-packages/uvicorn/middleware/proxy_headers.py", line 78, in __call__
+    return await self.app(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/fastapi/applications.py", line 269, in __call__
+    await super().__call__(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/applications.py", line 124, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/middleware/errors.py", line 184, in __call__
+    raise exc
+  File "/config/.local/lib/python3.8/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/middleware/cors.py", line 84, in __call__
+    await self.app(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/exceptions.py", line 93, in __call__
+    raise exc
+  File "/config/.local/lib/python3.8/site-packages/starlette/exceptions.py", line 82, in __call__
+    await self.app(scope, receive, sender)
+  File "/config/.local/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 21, in __call__
+    raise e
+  File "/config/.local/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/routing.py", line 670, in __call__
+    await route.handle(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/routing.py", line 266, in handle
+    await self.app(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/routing.py", line 65, in app
+    response = await func(request)
+  File "/config/.local/lib/python3.8/site-packages/fastapi/routing.py", line 227, in app
+    raw_response = await run_endpoint_function(
+  File "/config/.local/lib/python3.8/site-packages/fastapi/routing.py", line 160, in run_endpoint_function
+    return await dependant.call(**values)
+  File "main.py", line 92, in predict_route
+    raise Response(f"Error Occured! {e}")
+TypeError: exceptions must derive from BaseException
+[2023-12-21 12:02:44,621] root - INFO - Entered the load_object method of MainUtils class
+[2023-12-21 12:02:44,627] root - INFO - Exited the load_object method of MainUtils class
+[2023-12-21 12:02:44,628] uvicorn.error - ERROR - Exception in ASGI application
+Traceback (most recent call last):
+  File "main.py", line 85, in predict_route
+    y_pred = model.predict(df)
+NameError: name 'df' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/config/.local/lib/python3.8/site-packages/uvicorn/protocols/http/httptools_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/config/.local/lib/python3.8/site-packages/uvicorn/middleware/proxy_headers.py", line 78, in __call__
+    return await self.app(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/fastapi/applications.py", line 269, in __call__
+    await super().__call__(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/applications.py", line 124, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/middleware/errors.py", line 184, in __call__
+    raise exc
+  File "/config/.local/lib/python3.8/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/middleware/cors.py", line 84, in __call__
+    await self.app(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/exceptions.py", line 93, in __call__
+    raise exc
+  File "/config/.local/lib/python3.8/site-packages/starlette/exceptions.py", line 82, in __call__
+    await self.app(scope, receive, sender)
+  File "/config/.local/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 21, in __call__
+    raise e
+  File "/config/.local/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/routing.py", line 670, in __call__
+    await route.handle(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/routing.py", line 266, in handle
+    await self.app(scope, receive, send)
+  File "/config/.local/lib/python3.8/site-packages/starlette/routing.py", line 65, in app
+    response = await func(request)
+  File "/config/.local/lib/python3.8/site-packages/fastapi/routing.py", line 227, in app
+    raw_response = await run_endpoint_function(
+  File "/config/.local/lib/python3.8/site-packages/fastapi/routing.py", line 160, in run_endpoint_function
+    return await dependant.call(**values)
+  File "main.py", line 92, in predict_route
+    raise Response(f"Error Occured! {e}")
+TypeError: exceptions must derive from BaseException
+[2023-12-21 12:03:12,268] uvicorn.error - INFO - Shutting down
+[2023-12-21 12:03:12,368] uvicorn.error - INFO - Waiting for application shutdown.
+[2023-12-21 12:03:12,369] uvicorn.error - INFO - Application shutdown complete.
+[2023-12-21 12:03:12,369] uvicorn.error - INFO - Finished server process [1364]
