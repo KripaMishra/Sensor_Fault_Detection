@@ -1,0 +1,67 @@
+[2023-12-21 11:08:22,085] uvicorn.error - INFO - Started server process [1789]
+[2023-12-21 11:08:22,086] uvicorn.error - INFO - Waiting for application startup.
+[2023-12-21 11:08:22,086] uvicorn.error - INFO - Application startup complete.
+[2023-12-21 11:08:22,086] uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+[2023-12-21 11:08:31,485] root - INFO - Entered the start_data_ingestion method of TrainPipeline class
+[2023-12-21 11:08:31,485] root - INFO - Getting the data from mongodb
+[2023-12-21 11:08:31,579] root - INFO - Exporting data from mongodb to feature store
+[2023-12-21 11:08:40,097] root - INFO - Saving exported data into feature store file path: artifact/12_21_2023_11_08_20/data_ingestion/feature_store/sensor.csv
+[2023-12-21 11:08:44,676] root - INFO - Entered split_data_as_train_test method of Data_Ingestion class
+[2023-12-21 11:08:44,676] root - INFO - starting train, test split
+[2023-12-21 11:08:44,720] root - INFO - Performed train test split on the dataframe
+[2023-12-21 11:08:44,720] root - INFO - Exited split_data_as_train_test method of Data_Ingestion class
+[2023-12-21 11:08:44,720] root - INFO - Exporting train and test file path.
+[2023-12-21 11:08:49,174] root - INFO - Exported train and test file path.
+[2023-12-21 11:08:49,227] root - INFO - Got the train_set and test_set from mongodb
+[2023-12-21 11:08:49,227] root - INFO - Exited the start_data_ingestion method of TrainPipeline class
+[2023-12-21 11:08:49,227] root - INFO - Entered the start_data_validation method of TrainPipeline class
+[2023-12-21 11:08:49,954] root - INFO - Required number of columns: 164
+[2023-12-21 11:08:49,954] root - INFO - Data frame has columns: 164
+[2023-12-21 11:08:49,954] root - INFO - Required number of columns: 164
+[2023-12-21 11:08:49,954] root - INFO - Data frame has columns: 164
+[2023-12-21 11:08:49,954] root - INFO - Missing numerical columns: [[]]
+[2023-12-21 11:08:49,955] root - INFO - Missing numerical columns: [[]]
+[2023-12-21 11:08:51,285] root - INFO - Data validation artifact: DataValidationArtifact(validation_status=False, valid_train_file_path='artifact/12_21_2023_11_08_20/data_ingestion/ingested/train.csv', valid_test_file_path='artifact/12_21_2023_11_08_20/data_ingestion/ingested/test.csv', invalid_train_file_path=None, invalid_test_file_path=None, drift_report_file_path='artifact/12_21_2023_11_08_20/data_validation/drift_report/report.yaml')
+[2023-12-21 11:08:51,285] root - INFO - Performed the data validation operation
+[2023-12-21 11:08:51,285] root - INFO - Exited the start_data_validation method of TrainPipeline class
+[2023-12-21 11:08:51,285] root - INFO - Entered the start_data_transformation method of TrainPipeline class
+[2023-12-21 11:08:51,285] root - INFO - Starting data transformation
+[2023-12-21 11:08:51,285] root - INFO - Entered get_data_transformer_object method of DataTransformation class
+[2023-12-21 11:08:51,286] root - INFO - Got numerical cols from schema config
+[2023-12-21 11:08:51,286] root - INFO - Initialized RobustScaler, Simple Imputer
+[2023-12-21 11:08:51,286] root - INFO - Created preprocessor object from ColumnTransformer
+[2023-12-21 11:08:51,286] root - INFO - Exited get_data_transformer_object method of DataTransformation class
+[2023-12-21 11:08:51,286] root - INFO - Got the preprocessor object
+[2023-12-21 11:08:51,977] root - INFO - Got train features and test features of Training dataset
+[2023-12-21 11:08:51,984] root - INFO - Got train features and test features of Testing dataset
+[2023-12-21 11:08:51,985] root - INFO - Applying preprocessing object on training dataframe and testing dataframe
+[2023-12-21 11:08:52,290] root - INFO - Used the preprocessor object to fit transform the train features
+[2023-12-21 11:08:52,314] root - INFO - Used the preprocessor object to transform the test features
+[2023-12-21 11:08:52,314] root - INFO - Applying SMOTETomek on Training dataset
+[2023-12-21 11:08:56,996] root - INFO - Applied SMOTETomek on training dataset
+[2023-12-21 11:08:56,997] root - INFO - Applying SMOTETomek on testing dataset
+[2023-12-21 11:08:57,455] root - INFO - Applied SMOTETomek on testing dataset
+[2023-12-21 11:08:57,455] root - INFO - Created train array and test array
+[2023-12-21 11:08:57,495] root - INFO - Entered the save_object method of MainUtils class
+[2023-12-21 11:08:57,498] root - INFO - Exited the save_object method of MainUtils class
+[2023-12-21 11:08:57,582] root - INFO - Saved the preprocessor object
+[2023-12-21 11:08:57,582] root - INFO - Exited initiate_data_transformation method of Data_Transformation class
+[2023-12-21 11:08:57,584] root - INFO - Performed the data transformation operation
+[2023-12-21 11:08:57,584] root - INFO - Exited the start_data_transformation method of TrainPipeline class
+[2023-12-21 11:08:57,584] root - INFO - Entering the start_model_trainer
+[2023-12-21 11:09:05,740] root - INFO - Entered the load_object method of MainUtils class
+[2023-12-21 11:09:05,742] root - INFO - Exited the load_object method of MainUtils class
+[2023-12-21 11:09:05,742] root - INFO - Entered the save_object method of MainUtils class
+[2023-12-21 11:09:05,749] root - INFO - Exited the save_object method of MainUtils class
+[2023-12-21 11:09:05,749] root - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='artifact/12_21_2023_11_08_20/model_trainer/trained_model/model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9999821927809535, precision_score=1.0, recall_score=0.9999643861960896), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9743967039434962, precision_score=0.9957894736842106, recall_score=0.9539037741284933))
+[2023-12-21 11:09:05,750] root - INFO - Performed the start_model_trainer operation
+[2023-12-21 11:09:05,751] root - INFO - Exited the start_model_trainer method of TrainPipeline class
+[2023-12-21 11:09:06,468] root - INFO - Entered the load_object method of MainUtils class
+[2023-12-21 11:09:06,474] root - INFO - Exited the load_object method of MainUtils class
+[2023-12-21 11:09:06,474] root - INFO - Entered the load_object method of MainUtils class
+[2023-12-21 11:09:06,479] root - INFO - Exited the load_object method of MainUtils class
+[2023-12-21 11:09:06,792] root - INFO - Model evaluation artifact: ModelEvaluationArtifact(is_model_accepted=False, improved_accuracy=0.005962006250482377, best_model_path='saved_models/1703049895/model.pkl', trained_model_path='artifact/12_21_2023_11_08_20/model_trainer/trained_model/model.pkl', trained_model_metric_artifact=ClassificationMetricArtifact(f1_score=0.9654481722583875, precision_score=0.966900702106319, recall_score=0.964), best_model_metric_artifact=ClassificationMetricArtifact(f1_score=0.9594861660079052, precision_score=0.9482421875, recall_score=0.971))
+[2023-12-21 11:09:32,150] uvicorn.error - INFO - Shutting down
+[2023-12-21 11:09:32,251] uvicorn.error - INFO - Waiting for application shutdown.
+[2023-12-21 11:09:32,251] uvicorn.error - INFO - Application shutdown complete.
+[2023-12-21 11:09:32,252] uvicorn.error - INFO - Finished server process [1789]

@@ -1,0 +1,8 @@
+[2023-12-21 11:00:36,157] uvicorn.error - INFO - Started server process [1245]
+[2023-12-21 11:00:36,157] uvicorn.error - INFO - Waiting for application startup.
+[2023-12-21 11:00:36,158] uvicorn.error - INFO - Application startup complete.
+[2023-12-21 11:00:36,158] uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+[2023-12-21 11:07:08,087] uvicorn.error - INFO - Shutting down
+[2023-12-21 11:07:08,187] uvicorn.error - INFO - Waiting for application shutdown.
+[2023-12-21 11:07:08,188] uvicorn.error - INFO - Application shutdown complete.
+[2023-12-21 11:07:08,188] uvicorn.error - INFO - Finished server process [1245]
