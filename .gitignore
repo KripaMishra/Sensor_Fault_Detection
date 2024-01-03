@@ -3,5 +3,5 @@ Test.csv
 .env
 env.yaml
 
-git rm --cached .env
+git rm --cached Test.csv
 git commit -m "Untrack the specified file"
