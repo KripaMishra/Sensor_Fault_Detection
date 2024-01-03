@@ -1,2 +1,2 @@
-TRAINING_BUCKET_NAME = "" #Training Bucket name to be added
+TRAINING_BUCKET_NAME = "mysensordep" 
 PREDICTION_BUCKET_NAME = ""# Prediction Bucket name to be added 
