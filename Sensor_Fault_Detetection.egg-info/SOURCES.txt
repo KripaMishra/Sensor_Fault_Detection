@@ -10,6 +10,7 @@ sensor/__init__.py
 sensor/exception.py
 sensor/logger.py
 sensor/cloud_storage/__init__.py
+sensor/cloud_storage/s3_syncer.py
 sensor/components/__init__.py
 sensor/components/data_ingestion.py
 sensor/components/data_transformation.py
