@@ -18,8 +18,10 @@ data/
 datasets/
 outputs/
 models/
+artifact/
 artifacts/
 logs/
+uploads/
 *.joblib
 *.pkl
 *.npy
