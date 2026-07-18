@@ -1,7 +1,31 @@
-Test.csv
+# Local environments and packaging
+.venv/
+venv/
+*.egg-info/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
 
+# Secrets and local configuration
 .env
-env.yaml
+.env.*
+!.env.example
 
-git rm --cached Test.csv
-git commit -m "Untrack the specified file"
+# Data and generated ML outputs
+data/
+datasets/
+outputs/
+models/
+artifacts/
+logs/
+*.joblib
+*.pkl
+*.npy
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS/editor files
+.DS_Store
+.vscode/
+.idea/
