@@ -4,24 +4,26 @@ import argparse
 from pathlib import Path
 
 from .model import predict, train
+from .settings import Settings
 
 
-def build_parser() -> argparse.ArgumentParser:
+def build_parser(settings: Settings | None = None) -> argparse.ArgumentParser:
+    settings = settings or Settings.from_env()
     parser = argparse.ArgumentParser(description="Train and run the APS fault classifier.")
     commands = parser.add_subparsers(dest="command", required=True)
 
     train_parser = commands.add_parser("train", help="Train and evaluate on a held-out split")
-    train_parser.add_argument("--data", required=True, type=Path)
-    train_parser.add_argument("--schema", type=Path, default=Path("configs/schema.yaml"))
-    train_parser.add_argument("--output-dir", type=Path, default=Path("outputs/latest"))
-    train_parser.add_argument("--seed", type=int, default=42)
-    train_parser.add_argument("--test-size", type=float, default=0.2)
+    train_parser.add_argument("--data", type=Path, default=settings.data_path)
+    train_parser.add_argument("--schema", type=Path, default=settings.schema_path)
+    train_parser.add_argument("--output-dir", type=Path, default=settings.output_dir)
+    train_parser.add_argument("--seed", type=int, default=settings.seed)
+    train_parser.add_argument("--test-size", type=float, default=settings.test_size)
 
     predict_parser = commands.add_parser("predict", help="Predict labels for a feature-only CSV")
-    predict_parser.add_argument("--data", required=True, type=Path)
-    predict_parser.add_argument("--model", required=True, type=Path)
-    predict_parser.add_argument("--schema", type=Path, default=Path("configs/schema.yaml"))
-    predict_parser.add_argument("--output", type=Path, required=True)
+    predict_parser.add_argument("--data", type=Path, default=settings.data_path)
+    predict_parser.add_argument("--model", type=Path, default=settings.output_dir / "model.joblib")
+    predict_parser.add_argument("--schema", type=Path, default=settings.schema_path)
+    predict_parser.add_argument("--output", type=Path, default=settings.output_dir / "predictions.csv")
     return parser
 
 

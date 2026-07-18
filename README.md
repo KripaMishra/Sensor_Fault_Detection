@@ -35,6 +35,10 @@ python -m sensor_fault_detection predict \
 
 Run quality checks with `ruff check src tests` and `pytest -q`.
 
+## Configuration
+
+Runtime defaults are centralized in `sensor_fault_detection.settings.Settings`. Copy `.env.example` to `.env` when local overrides are needed; real credentials belong in a secret manager and must never be committed. The offline MVP does not connect to MongoDB, but a safe localhost placeholder is included for future adapters.
+
 ## Data contract
 
 The real APS dataset is intentionally not committed. See [docs/data.md](docs/data.md) for provenance, licensing, and acquisition requirements. The checked-in fixture is synthetic and exists only to exercise the pipeline without network access.
