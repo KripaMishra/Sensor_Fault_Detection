@@ -1,0 +1,7 @@
+target_column: class
+feature_columns:
+  - sensor_a
+  - sensor_b
+  - sensor_c
+  - sensor_d
+drop_columns: []
