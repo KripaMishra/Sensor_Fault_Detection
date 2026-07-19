@@ -32,7 +32,7 @@ def run_training(settings: Settings) -> PipelineResult:
     schema = DatasetSchema.from_yaml(settings.schema_path)
     frame = validate_dataframe(load_source(settings), schema, require_target=True)
 
-    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     run_dir = settings.artifact_root / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
     feature_store = run_dir / "data_ingestion" / "feature_store" / "sensor.csv"
@@ -66,7 +66,12 @@ def run_training(settings: Settings) -> PipelineResult:
     if settings.s3_sync_enabled:
         from .cloud import S3ArtifactStore
 
-        S3ArtifactStore(settings).upload_directory(run_dir)
+        store = S3ArtifactStore(settings)
+        prefix = f"{settings.s3_artifact_prefix}/{run_dir.name}"
+        store.upload_directory(training_dir, prefix=f"{prefix}/model")
+        store.upload_directory(
+            drift_report_path.parent, prefix=f"{prefix}/data_validation"
+        )
 
     return PipelineResult(
         run_dir=run_dir,

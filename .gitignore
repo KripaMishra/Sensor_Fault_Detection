@@ -12,6 +12,7 @@ dist/
 .env
 .env.*
 !.env.example
+PENDENCIES.md
 
 # Data and generated ML outputs
 data/

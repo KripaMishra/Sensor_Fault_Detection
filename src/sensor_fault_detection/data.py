@@ -45,6 +45,8 @@ def validate_dataframe(
         raise ValueError(f"Missing required columns: {', '.join(missing)}")
 
     allowed = required | set(schema.drop_columns)
+    if not require_target:
+        allowed.add(schema.target_column)
     unexpected = sorted(set(dataframe.columns) - allowed)
     if unexpected:
         raise ValueError(f"Unexpected columns: {', '.join(unexpected)}")

@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install project
-        run: python -m pip install --upgrade pip && pip install -e ".[dev,api]"
+        run: python -m pip install --upgrade pip && pip install -e ".[dev,full]" pip-audit
       - name: Lint
         run: ruff check src tests
       - name: Test
@@ -26,3 +26,7 @@ jobs:
         run: python -c "from sensor_fault_detection.api import create_app; create_app()"
       - name: Build package
         run: python -m build
+      - name: Build Docker image
+        run: docker build -f dockerfile -t sensor-fault-detection:ci .
+      - name: Audit dependencies
+        run: pip-audit
