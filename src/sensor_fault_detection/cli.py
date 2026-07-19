@@ -29,7 +29,9 @@ def build_parser(settings: Settings | None = None) -> argparse.ArgumentParser:
     pipeline_parser = commands.add_parser(
         "pipeline-train", help="Run ingestion, validation, drift, training, promotion, and optional sync"
     )
-    pipeline_parser.add_argument("--source", choices=["local", "mongo", "s3"], default=settings.source)
+    pipeline_parser.add_argument(
+        "--source", choices=["local", "mongo", "r2"], default=settings.source
+    )
     pipeline_parser.add_argument("--data", type=Path, default=None)
     pipeline_parser.add_argument("--schema", type=Path, default=settings.schema_path)
     pipeline_parser.add_argument("--artifact-root", type=Path, default=settings.artifact_root)

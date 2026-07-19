@@ -6,17 +6,22 @@ from .settings import Settings
 
 
 class S3ArtifactStore:
-    """Optional S3 artifact storage using boto3's credential chain."""
+    """Optional S3-compatible artifact storage, including Cloudflare R2."""
 
     def __init__(self, settings: Settings) -> None:
-        if not settings.s3_bucket:
-            raise ValueError("SFD_S3_BUCKET is required for S3 artifact storage")
+        settings.validate_r2()
         try:
             import boto3
         except ImportError as exc:
-            raise RuntimeError("Install the 'cloud' extra to use S3 artifact storage") from exc
+            raise RuntimeError("Install the 'cloud' extra to use R2 artifact storage") from exc
         self.settings = settings
-        self.client = boto3.client("s3", region_name=settings.aws_region)
+        client_kwargs = {
+            "region_name": settings.aws_region,
+            "endpoint_url": settings.s3_endpoint_url,
+            "aws_access_key_id": settings.r2_access_key_id,
+            "aws_secret_access_key": settings.r2_secret_access_key,
+        }
+        self.client = boto3.client("s3", **client_kwargs)
 
     def upload_directory(self, directory: str | Path, prefix: str | None = None) -> None:
         root = Path(directory)

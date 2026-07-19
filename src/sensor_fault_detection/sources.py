@@ -29,14 +29,22 @@ class S3CsvDataSource:
         self.settings = settings
 
     def read(self) -> pd.DataFrame:
-        if not self.settings.s3_bucket or not self.settings.s3_data_key:
-            raise ValueError("SFD_S3_BUCKET and SFD_S3_DATA_KEY are required for the S3 source")
+        self.settings.validate_r2()
+        if not self.settings.s3_data_key:
+            raise ValueError("SFD_R2_DATA_KEY is required for the R2 source")
         try:
             import boto3
         except ImportError as exc:
-            raise RuntimeError("Install the 'cloud' extra to use the S3 source") from exc
+            raise RuntimeError("Install the 'cloud' extra to use the R2 source") from exc
 
-        body = boto3.client("s3", region_name=self.settings.aws_region).get_object(
+        client_kwargs = {
+            "region_name": self.settings.aws_region,
+            "endpoint_url": self.settings.s3_endpoint_url,
+            "aws_access_key_id": self.settings.r2_access_key_id,
+            "aws_secret_access_key": self.settings.r2_secret_access_key,
+        }
+
+        body = boto3.client("s3", **client_kwargs).get_object(
             Bucket=self.settings.s3_bucket, Key=self.settings.s3_data_key
         )["Body"]
         return pd.read_csv(body, na_values=["?", "NA", "N/A", "null"])
@@ -47,6 +55,6 @@ def load_source(settings: Settings) -> pd.DataFrame:
         return pd.read_csv(settings.data_path, na_values=["?", "NA", "N/A", "null"])
     if settings.source == "mongo":
         return MongoDataSource(settings).read()
-    if settings.source == "s3":
+    if settings.source == "r2":
         return S3CsvDataSource(settings).read()
     raise ValueError(f"Unsupported SFD_SOURCE: {settings.source}")

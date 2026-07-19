@@ -3,7 +3,13 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from sensor_fault_detection.data import DatasetSchema, load_training_data, split_data, validate_dataframe
+from sensor_fault_detection.data import (
+    DatasetSchema,
+    load_prediction_data,
+    load_training_data,
+    split_data,
+    validate_dataframe,
+)
 
 
 ROOT = Path(__file__).parent
@@ -15,6 +21,13 @@ def test_schema_rejects_missing_feature():
     frame = pd.read_csv(DATA).drop(columns=["sensor_d"])
     with pytest.raises(ValueError, match="Missing required columns"):
         validate_dataframe(frame, SCHEMA, require_target=True)
+
+
+def test_prediction_data_accepts_training_fixture_with_target():
+    prediction_data = load_prediction_data(DATA, SCHEMA)
+
+    assert list(prediction_data.columns) == list(SCHEMA.feature_columns)
+    assert len(prediction_data) == len(pd.read_csv(DATA))
 
 
 def test_split_is_deterministic_and_stratified():

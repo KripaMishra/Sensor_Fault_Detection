@@ -23,7 +23,10 @@ class Settings:
     s3_bucket: str = ""
     s3_artifact_prefix: str = "sensor-fault-detection"
     s3_data_key: str = ""
-    aws_region: str = "us-east-1"
+    s3_endpoint_url: str = ""
+    r2_access_key_id: str = ""
+    r2_secret_access_key: str = ""
+    aws_region: str = "auto"
     s3_sync_enabled: bool = False
     drift_threshold: float = 0.05
     api_host: str = "127.0.0.1"
@@ -45,11 +48,14 @@ class Settings:
             mongo_db_url=os.getenv("MONGO_DB_URL", cls.mongo_db_url),
             mongo_database=os.getenv("MONGO_DATABASE", cls.mongo_database),
             mongo_collection=os.getenv("MONGO_COLLECTION", cls.mongo_collection),
-            s3_bucket=os.getenv("SFD_S3_BUCKET", cls.s3_bucket),
-            s3_artifact_prefix=os.getenv("SFD_S3_ARTIFACT_PREFIX", cls.s3_artifact_prefix),
-            s3_data_key=os.getenv("SFD_S3_DATA_KEY", cls.s3_data_key),
-            aws_region=os.getenv("AWS_REGION", cls.aws_region),
-            s3_sync_enabled=os.getenv("SFD_S3_SYNC_ENABLED", "false").lower() == "true",
+            s3_bucket=os.getenv("SFD_R2_BUCKET", cls.s3_bucket),
+            s3_artifact_prefix=os.getenv("SFD_R2_ARTIFACT_PREFIX", cls.s3_artifact_prefix),
+            s3_data_key=os.getenv("SFD_R2_DATA_KEY", cls.s3_data_key),
+            s3_endpoint_url=os.getenv("R2_ENDPOINT_URL", cls.s3_endpoint_url),
+            r2_access_key_id=os.getenv("R2_ACCESS_KEY_ID", cls.r2_access_key_id),
+            r2_secret_access_key=os.getenv("R2_SECRET_ACCESS_KEY", cls.r2_secret_access_key),
+            aws_region=cls.aws_region,
+            s3_sync_enabled=os.getenv("SFD_R2_SYNC_ENABLED", "false").lower() == "true",
             drift_threshold=float(os.getenv("SFD_DRIFT_THRESHOLD", cls.drift_threshold)),
             api_host=os.getenv("SFD_API_HOST", cls.api_host),
             api_port=int(os.getenv("SFD_API_PORT", cls.api_port)),
@@ -60,10 +66,28 @@ class Settings:
                 if origin.strip()
             ),
         )
-        if settings.source not in {"local", "mongo", "s3"}:
-            raise ValueError("SFD_SOURCE must be local, mongo, or s3")
+        if settings.source not in {"local", "mongo", "r2"}:
+            raise ValueError("SFD_SOURCE must be local, mongo, or r2")
+        if settings.source == "r2" or settings.s3_sync_enabled:
+            settings.validate_r2()
         if not 0 < settings.test_size < 1:
             raise ValueError("SFD_TEST_SIZE must be between 0 and 1")
         if not 0 < settings.drift_threshold < 1:
             raise ValueError("SFD_DRIFT_THRESHOLD must be between 0 and 1")
         return settings
+
+    def validate_r2(self) -> None:
+        missing = [
+            name
+            for name, value in (
+                ("SFD_R2_BUCKET", self.s3_bucket),
+                ("R2_ENDPOINT_URL", self.s3_endpoint_url),
+                ("R2_ACCESS_KEY_ID", self.r2_access_key_id),
+                ("R2_SECRET_ACCESS_KEY", self.r2_secret_access_key),
+            )
+            if not value
+        ]
+        if missing:
+            raise ValueError(f"R2 configuration requires: {', '.join(missing)}")
+        if not self.s3_endpoint_url.startswith("https://"):
+            raise ValueError("R2_ENDPOINT_URL must use https://")
